@@ -25,11 +25,12 @@ YJIT も有効化したので、YJIT 有効化前後のパフォーマンス比�
 ### リクエスト数
 ![](/images/ruby_3_2_yjit/request.png)
 Avg 2.34k → 2.36k  
-時間ごとのリクエスト数の差はほとんど無い状態での比較です。
+時間ごとのリクエスト数の差はほとんどありませんでした。  
+従って以降の各指標は YJIT 有効化前後でほぼ同じ条件での比較となります。
 
 ### Rack Request P90 Latency
 ![](/images/ruby_3_2_yjit/rack_request_p90_latency.png)
-Avg 255ms → 220ms (**-13.7%**)  
+👍 Avg 255ms → 220ms (**-13.7%**)  
 リクエスト全体で見ると **13.7%** 高速化していることが確認できました。  
 ただし一部の時間帯で不自然にレスポンスタイムが速くなっていました。(Wed 17 あたり)  
 調査したところ 404 Not Found を返しているリクエストが大量にあったため、その時間帯で平均するとレスポンスが速くなっていました。  
@@ -37,26 +38,26 @@ Avg 255ms → 220ms (**-13.7%**)
 
 ### ActiveRecord Instantiation P90 Latency
 ![](/images/ruby_3_2_yjit/active_record_instantiation_p90_latency.png)
-Avg 215μm → 171μm (**-20.4%**)  
+👍 Avg 215μm → 171μm (**-20.4%**)  
 インスタンス生成にかかる時間は改善度合いが大きいようです。  
 
 ### Action Controller P90 Latency
 ![](/images/ruby_3_2_yjit/action_controller_p90_latency.png)
-Avg 293ms → 280ms (**-4.4%**)  
+👍 Avg 293ms → 280ms (**-4.4%**)  
 コントローラ全体で見るとあまり改善が見られませんでした。  
 
-弊社のサービスではソーシャルログインを扱っているため、認証プロバイダに対して http リクエストを送信しています。  
+弊社のサービスではソーシャルログインを扱っているため、認証プロバイダに対して HTTP リクエストを送信しています。  
 コントローラの処理における外部リクエストの割合が多く(約50%)、Ruby の割合が少ない(約20%)ため、影響が少なかったようです。
 ![](/images/ruby_3_2_yjit/time_spent_in_controller.png)
 
 ### CPU 使用率
 ![](/images/ruby_3_2_yjit/cpu_utilization.png)
-Avg 3.44% → 3.04% (**-0.4%**)  
+👍 Avg 3.44% → 3.04% (**-0.4%**)  
 CPU 使用率は若干低下していました。  
 
 ### メモリ使用量
 ![](/images/ruby_3_2_yjit/memory_usage.png)
-Avg 306MiB → 385MiB (**+25.8%**)  
+👎 Avg 306MiB → 385MiB (**+25.8%**)  
 メモリ使用量は明らかに上がっていました。  
 今回はサーバー上の問題は無かったのでパラメータのチューニングは行っていませんが、実行環境によっては注意が必要そうです。  
 https://k0kubun.hatenablog.com/entry/tuning-yjit
