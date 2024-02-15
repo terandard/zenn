@@ -3,7 +3,8 @@ title: "Ruby3.2 + Rails 7.0 で YJIT 有効化によるパフォーマンスに�
 emoji: "☕"
 type: "tech"
 topics: ["ruby", "rails"]
-published: false
+published: true
+published_at: 2024-02-15 12:00
 publication_name: "socialplus"
 ---
 ## はじめに
