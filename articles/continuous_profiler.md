@@ -3,7 +3,8 @@ title: "Datadog Continuous Profiler を用いて、ボトルネックが Ruby �
 emoji: "📘"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["ruby", "rails", "datadog"]
-published: false
+published: true
+published_at: 2024-07-31 10:00
 publication_name: "socialplus"
 ---
 
